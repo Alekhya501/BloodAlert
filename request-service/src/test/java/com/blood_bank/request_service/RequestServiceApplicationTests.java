@@ -1,0 +1,13 @@
+package com.blood_bank.request_service;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class RequestServiceApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
