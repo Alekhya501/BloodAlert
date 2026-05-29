@@ -1,0 +1,29 @@
+server:
+  port: 8086
+spring:
+  application:
+    name: api-gateway-service
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: donor-service
+          uri: lb://donor-service
+          predicates:
+            - Path=/api/donors/**
+        - id: hospital-service
+          uri: lb://hospital-service
+          predicates:
+            - Path=/api/hospitals/**
+        - id: request-service
+          uri: lb://request-service
+          predicates:
+            - Path=/api/requests/**
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

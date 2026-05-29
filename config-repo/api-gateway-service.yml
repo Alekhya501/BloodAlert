@@ -1,0 +1,31 @@
+server:
+  port: 8086
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: donor-service
+          uri: lb://donor-service
+          predicates:
+            - Path=/api/donors/**
+        - id: hospital-service
+          uri: lb://hospital-service
+          predicates:
+            - Path=/api/hospitals/**
+        - id: request-service
+          uri: lb://request-service
+          predicates:
+            - Path=/api/requests/**
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/api/auth/**
